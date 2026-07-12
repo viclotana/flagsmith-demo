@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teach Your AI Agent to Ship Like a Senior Engineer - Flagsmith Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,700&family=Open+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #1A1035;
+    --purple: #1A1035;
+    --teal:   #0AC2A3;
+    --yellow: #F7D56E;
+    --muted:  #6B6580;
+    --bg:     #EEEBE3;
+    --bg2:    #E6E3DB;
+    --border: #D8D4CC;
+  }
+
+  html { background: var(--bg); color: var(--ink); font-family: 'Open Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 56px; height: 68px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(238,235,227,0.96);
+    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo-text { font-weight: 700; font-size: 18px; color: var(--ink); letter-spacing: -0.3px; font-family: 'Bitter', serif; }
+  .logo-text span { color: var(--purple); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: var(--muted); font-size: 14px; text-decoration: none; font-weight: 500; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--ink); font-weight: 600; }
+  .nav-right { display: flex; gap: 12px; align-items: center; }
+  .btn-outline { border: 1.5px solid var(--border); color: var(--ink); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; background: transparent; }
+  .btn-purple { background: var(--teal); color: #fff; padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+
+  .post-header { max-width: 720px; margin: 0 auto; padding: 80px 48px 0; }
+  .back-link { font-size: 14px; color: var(--teal); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 32px; }
+  .back-link:hover { text-decoration: underline; }
+  .post-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .post-tag { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase; background: rgba(10,194,163,0.1); padding: 4px 10px; border-radius: 4px; }
+  .post-date { font-size: 13px; color: var(--muted); }
+  .post-header h1 { font-size: 38px; font-weight: 700; letter-spacing: -1px; line-height: 1.2; color: var(--ink); margin-bottom: 0; font-family: 'Bitter', serif; }
+  .post-subtitle { font-size: 18px; color: var(--muted); line-height: 1.6; margin-top: 16px; }
+
+  .post-body { max-width: 720px; margin: 0 auto; padding: 40px 48px 80px; }
+  .post-body p { font-size: 17px; color: var(--ink); line-height: 1.8; margin-bottom: 24px; }
+  .post-body code { font-family: 'JetBrains Mono', monospace; font-size: 14px; background: var(--bg2); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+
+  .post-code-block { background: var(--ink); border-radius: 10px; padding: 24px 28px; margin: 28px 0; overflow-x: auto; }
+  .post-code-block pre { font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.8; color: #D4C8E0; margin: 0; white-space: pre-wrap; }
+  .post-code-block .hl-key { color: var(--teal); }
+  .post-code-block .hl-str { color: var(--yellow); }
+  .post-code-block .hl-comment { color: #5A4A63; }
+
+  .post-body h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; color: var(--ink); margin: 48px 0 20px; font-family: 'Bitter', serif; }
+
+  .section-divider { width: 48px; height: 3px; background: var(--teal); border-radius: 2px; margin: 56px 0; opacity: 0.4; }
+
+  footer { padding: 24px 56px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  footer span { color: var(--muted); font-size: 13px; }
+  .ftags { display: flex; gap: 8px; }
+  .ftag { font-size: 11px; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); padding: 3px 10px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; } .nav-links { display: none; }
+    .post-header { padding: 64px 24px 0; }
+    .post-header h1 { font-size: 28px; }
+    .post-body { padding: 32px 24px 64px; }
+    footer { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="flagsmith-mcp-full.html" style="text-decoration:none"><div class="logo-text">Flag<span>smith</span></div></a>
+  <div class="nav-links">
+    <a href="flagsmith-mcp-full.html">Product</a><a href="#">Solutions</a><a href="#">Pricing</a><a href="#">Docs</a><a href="blog.html" class="active">Blog</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="btn-outline">Sign In</a>
+    <a href="#" class="btn-purple">Start Free</a>
+  </div>
+</nav>
+
+<div class="post-header">
+  <a href="blog.html" class="back-link">← Back to Blog</a>
+  <div class="post-meta">
+    <span class="post-tag">Technical</span>
+    <span class="post-date">July 12, 2026</span>
+  </div>
+  <h1>Teach Your AI Agent to Ship Like a Senior Engineer</h1>
+  <p class="post-subtitle">A senior engineer doesn't just write code. They know when to ship, who to ship to, and how to pull it back. Here is how to give your AI agent the same instincts.</p>
+</div>
+
+<div class="post-body">
+
+  <p>A senior engineer does something specific at release time that a junior doesn't. They pause. They ask: who sees this first? They ship to the internal team. They watch error rates for an hour. They widen to 10%. They keep one hand on the kill switch the entire time. If something moves in the wrong direction, they roll back before anyone has to ask them to.</p>
+
+  <p>None of that is about writing code. It is about judgment. And until now, AI agents had no way to exercise that judgment. They could write the feature, but the moment it came time to release, they stopped. The human took over, opened a dashboard, clicked through targeting rules, and manually configured the rollout.</p>
+
+  <p>That boundary no longer exists. With Flagsmith's MCP server, agents can create feature flags, target user segments, configure percentage rollouts, and publish versioned changes. All from inside the same conversation where the code was written. The senior engineer's instincts become tools the agent can call.</p>
+
+  <h2>What a Senior Engineer Does Differently</h2>
+
+  <p>The difference between a senior and a junior at release time is not skill. It is risk awareness. A junior ships to everyone because they haven't been burned yet. A senior ships to 5% of internals because they have.</p>
+
+  <p>That risk awareness shows up as a series of habits: always gate new features behind a flag. Always test in a non-production environment first. Always target a small audience before widening. Always have a rollback plan that takes seconds, not minutes. Always version your changes so you can audit what happened later.</p>
+
+  <p>Each of those habits maps directly to a Flagsmith operation. And each of those operations is now available to any MCP-compatible agent as a tool it can call through natural language.</p>
+
+  <h2>Before You Start</h2>
+
+  <p>This article uses Flagsmith and its MCP server. If you don't have an account yet, the free tier covers everything shown here. If you're already set up, skip to the next section.</p>
+
+  <h2>Connect Once, Ship Safely Forever</h2>
+
+  <p>The setup takes thirty seconds. Add the Flagsmith MCP server to your agent's configuration:</p>
+
+  <div class="post-code-block">
+<pre>{
+  <span class="hl-str">"mcpServers"</span>: {
+    <span class="hl-str">"flagsmith"</span>: {
+      <span class="hl-str">"url"</span>: <span class="hl-str">"https://mcp.flagsmith.com"</span>,
+      <span class="hl-str">"headers"</span>: {
+        <span class="hl-str">"Authorization"</span>: <span class="hl-str">"Token &lt;your-api-key&gt;"</span>
+      }
+    }
+  }
+}</pre>
+  </div>
+
+  <p>After that, your agent has access to every release operation you would normally perform in the Flagsmith dashboard. It can list projects, query environments, create flags, update feature states, configure rollout percentages, and publish versioned changes. Every operation is auditable and reversible.</p>
+
+  <div class="post-code-block">
+<pre><span class="hl-comment">// prompt</span>
+<span class="hl-str">Show me all feature flags in my project and which
+environments they are enabled in.</span></pre>
+  </div>
+
+  <h2>Never Ship Without a Way Back</h2>
+
+  <p>A senior engineer never makes a production change they can't undo in seconds. Flagsmith enforces this with a versioning model. When you change a flag's state in an environment, you are not mutating the live state directly. You create a new version, modify the feature state within that version, and then explicitly publish it.</p>
+
+  <p>This means the agent cannot accidentally make a change that takes effect without a publish step. If the agent is interrupted or makes an error, the unpublished version has no effect on live traffic. And if a published change causes problems, you roll back to the previous version instantly.</p>
+
+  <p>The workflow is always: prepare, review, ship. The same pattern a senior engineer follows instinctively.</p>
+
+  <div class="post-code-block">
+<pre><span class="hl-comment">// prompt</span>
+<span class="hl-str">Enable checkout_v2 in staging. Show me the proposed
+change before publishing it.</span></pre>
+  </div>
+
+  <h2>Test Where It's Safe, Ship Where It Matters</h2>
+
+  <p>A senior engineer never tests in production. They have a Development environment where they can toggle things freely, and a Production environment where changes go through process.</p>
+
+  <p>Flagsmith treats environments as completely independent. Each has its own API key, its own feature state history, and its own version timeline. A flag can be enabled in Development for testing while remaining disabled in Production. When an agent enables a flag, it does so within a specific environment. There is no risk of a Development toggle accidentally affecting Production.</p>
+
+  <p>This also means you can give agents different levels of trust per environment. Let them toggle freely in Development. Require approval workflows in Production. The boundaries are enforced at the API level, not by convention.</p>
+
+  <div class="post-code-block">
+<pre><span class="hl-comment">// prompt</span>
+<span class="hl-str">Enable checkout_v2 in development but keep it disabled
+in production.</span></pre>
+  </div>
+
+  <h2>Ship to Internals Before the World</h2>
+
+  <p>A senior engineer's first question before any release is: "Can we dogfood this first?" They want the internal team to hit the new code path before any real user does. If something is broken, it gets caught by someone who can file a bug, not someone who churns.</p>
+
+  <p>Flagsmith segments define audiences based on identity traits. An agent can create a segment, define its rules, and attach a flag override to it. The segment creation, rule definition, and flag assignment all happen in a single interaction.</p>
+
+  <p>This is the kind of operation that takes five minutes of clicking through a dashboard. In conversation, it takes one sentence.</p>
+
+  <div class="post-code-block">
+<pre><span class="hl-comment">// prompt</span>
+<span class="hl-str">Enable checkout_v2 only for users in the internal_users
+segment. If that segment does not exist yet, create it
+using the trait is_internal = true.</span></pre>
+  </div>
+
+  <h2>Start Small, Watch, Then Widen</h2>
+
+  <p>A senior engineer never goes from 0% to 100% in one step. They start at 5%. They watch metrics. If everything looks clean, they go to 25%, then 50%, then 100%. Each step is a conscious decision. Each step has a pause where they look at the data.</p>
+
+  <p>Flagsmith supports percentage rollouts natively. The agent can set a rollout percentage, confirm the current state, and adjust it over time. Combined with segments, you can target specific audiences at specific percentages: "Roll out to 10% of users in the premium segment."</p>
+
+  <p>The reason most teams skip gradual rollouts is friction. When increasing a rollout percentage takes one sentence instead of three minutes of dashboard navigation, teams actually do it. The safe behaviour becomes the easy behaviour.</p>
+
+  <div class="post-code-block">
+<pre><span class="hl-comment">// prompt</span>
+<span class="hl-str">Roll out checkout_v2 to 10% of production users.
+Confirm the percentage and current flag state after.</span></pre>
+  </div>
+
+  <h2>Kill It Fast If Something Breaks</h2>
+
+  <p>The most important skill a senior engineer has is not shipping. It is recovering. The rollback that matters most is the one you do at 11pm when something is broken and you are already stressed. It needs to be fast, obvious, and require zero thought.</p>
+
+  <p>With Flagsmith, disabling a flag is a single operation. The agent can do it in one prompt. The change takes effect in seconds. No deployment required. No waiting for CI. No hoping the revert commit passes tests.</p>
+
+  <p>This is the kill switch every senior engineer keeps in their back pocket. Now your agent has one too.</p>
+
+  <div class="section-divider"></div>
+
+  <p>A senior engineer's value at release time is not technical skill. It is pattern recognition built over years of production scars. They know what can go wrong because they have seen it go wrong.</p>
+
+  <p>Your AI agent does not need ten years of incidents to ship safely. It just needs the right tools and the right rules. Feature flags encode those rules. Flagsmith MCP exposes them as tools. And the agent already knows how to use tools.</p>
+
+  <p>That is what teaching looks like.</p>
+
+</div>
+
+<footer>
+  <span>&copy; 2026 Flagsmith &middot; Bullet Train Ltd.</span>
+  <div class="ftags">
+    <span class="ftag">open-source</span>
+    <span class="ftag">self-hosted</span>
+    <span class="ftag">bootstrapped</span>
+  </div>
+</footer>
+
+</body>
+</html>

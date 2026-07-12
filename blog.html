@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Flagsmith MCP</title>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,700&family=Open+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #1A1035;
+    --purple: #1A1035;
+    --teal:   #0AC2A3;
+    --yellow: #F7D56E;
+    --muted:  #6B6580;
+    --bg:     #EEEBE3;
+    --bg2:    #E6E3DB;
+    --border: #D8D4CC;
+  }
+
+  html { background: var(--bg); color: var(--ink); font-family: 'Open Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 56px; height: 68px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(238,235,227,0.96);
+    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo-text { font-weight: 700; font-size: 18px; color: var(--ink); letter-spacing: -0.3px; font-family: 'Bitter', serif; }
+  .logo-text span { color: var(--purple); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: var(--muted); font-size: 14px; text-decoration: none; font-weight: 500; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--ink); font-weight: 600; }
+  .nav-right { display: flex; gap: 12px; align-items: center; }
+  .btn-outline { border: 1.5px solid var(--border); color: var(--ink); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; background: transparent; }
+  .btn-purple { background: var(--teal); color: #fff; padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+
+  .blog-header { text-align: center; padding: 80px 48px 48px; max-width: 700px; margin: 0 auto; }
+  .blog-header h1 { font-size: 44px; font-weight: 700; line-height: 1.15; letter-spacing: -1px; color: var(--ink); margin-bottom: 16px; font-family: 'Bitter', serif; }
+  .blog-header p { font-size: 18px; color: var(--muted); line-height: 1.6; }
+
+  .blog-list { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; display: flex; flex-direction: column; gap: 24px; }
+  .blog-card-link { text-decoration: none; display: block; }
+  .blog-card { background: #FAF9F5; border: 1px solid var(--border); border-radius: 16px; padding: 40px; transition: box-shadow 0.2s, border-color 0.2s; }
+  .blog-card:hover { box-shadow: 0 8px 32px rgba(30,13,38,0.08); border-color: var(--teal); }
+  .blog-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .blog-tag { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase; background: rgba(10,194,163,0.1); padding: 4px 10px; border-radius: 4px; }
+  .blog-date { font-size: 13px; color: var(--muted); }
+  .blog-card h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.25; color: var(--ink); margin-bottom: 14px; font-family: 'Bitter', serif; }
+  .blog-card p { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .read-more { font-size: 14px; font-weight: 600; color: var(--teal); }
+
+  footer { padding: 24px 56px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  footer span { color: var(--muted); font-size: 13px; }
+  .ftags { display: flex; gap: 8px; }
+  .ftag { font-size: 11px; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); padding: 3px 10px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; } .nav-links { display: none; }
+    .blog-header { padding: 64px 24px 40px; }
+    .blog-header h1 { font-size: 32px; }
+    .blog-post { padding: 0 24px 64px; }
+    .blog-card { padding: 28px; }
+    footer { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="flagsmith-mcp-full.html" style="text-decoration:none"><div class="logo-text">Flag<span>smith</span></div></a>
+  <div class="nav-links">
+    <a href="flagsmith-mcp-full.html">Product</a><a href="#">Solutions</a><a href="#">Pricing</a><a href="#">Docs</a><a href="blog.html" class="active">Blog</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="btn-outline">Sign In</a>
+    <a href="#" class="btn-purple">Start Free</a>
+  </div>
+</nav>
+
+<div class="blog-header">
+  <h1>Blog</h1>
+</div>
+
+<div class="blog-list">
+  <a href="blog-post-4.html" class="blog-card-link">
+    <div class="blog-card">
+      <div class="blog-meta">
+        <span class="blog-tag">Technical</span>
+        <span class="blog-date">July 12, 2026</span>
+      </div>
+      <h2>Teach Your AI Agent to Ship Like a Senior Engineer</h2>
+      <p>A senior engineer doesn't just write code. They know when to ship, who to ship to, and how to pull it back. Here is how to give your AI agent the same instincts.</p>
+      <span class="read-more">Read more →</span>
+    </div>
+  </a>
+
+  <a href="blog-post-2.html" class="blog-card-link">
+    <div class="blog-card">
+      <div class="blog-meta">
+        <span class="blog-tag">Workflow</span>
+        <span class="blog-date">July 12, 2026</span>
+      </div>
+      <h2>7 Release Tasks I Handed to Cursor Instead of Doing Myself</h2>
+      <p>I wanted to see how much of my release workflow an AI agent could handle autonomously. Here's what happened...</p>
+      <span class="read-more">Read more →</span>
+    </div>
+  </a>
+
+</div>
+
+<footer>
+  <span>&copy; 2026 Flagsmith &middot; Bullet Train Ltd.</span>
+  <div class="ftags">
+    <span class="ftag">open-source</span>
+    <span class="ftag">self-hosted</span>
+    <span class="ftag">bootstrapped</span>
+  </div>
+</footer>
+
+</body>
+</html>

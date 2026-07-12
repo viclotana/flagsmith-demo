@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Release Tasks I Handed to Cursor Instead of Doing Myself — Flagsmith Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,700&family=Open+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #1A1035;
+    --purple: #1A1035;
+    --teal:   #0AC2A3;
+    --yellow: #F7D56E;
+    --muted:  #6B6580;
+    --bg:     #EEEBE3;
+    --bg2:    #E6E3DB;
+    --border: #D8D4CC;
+  }
+
+  html { background: var(--bg); color: var(--ink); font-family: 'Open Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 56px; height: 68px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(238,235,227,0.96);
+    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo-text { font-weight: 700; font-size: 18px; color: var(--ink); letter-spacing: -0.3px; font-family: 'Bitter', serif; }
+  .logo-text span { color: var(--purple); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: var(--muted); font-size: 14px; text-decoration: none; font-weight: 500; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--ink); font-weight: 600; }
+  .nav-right { display: flex; gap: 12px; align-items: center; }
+  .btn-outline { border: 1.5px solid var(--border); color: var(--ink); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; background: transparent; }
+  .btn-purple { background: var(--teal); color: #fff; padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+
+  .post-header { max-width: 720px; margin: 0 auto; padding: 80px 48px 0; }
+  .back-link { font-size: 14px; color: var(--teal); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 32px; }
+  .back-link:hover { text-decoration: underline; }
+  .post-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .post-tag { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase; background: rgba(10,194,163,0.1); padding: 4px 10px; border-radius: 4px; }
+  .post-date { font-size: 13px; color: var(--muted); }
+  .post-header h1 { font-size: 38px; font-weight: 700; letter-spacing: -1px; line-height: 1.2; color: var(--ink); margin-bottom: 0; font-family: 'Bitter', serif; }
+  .post-subtitle { font-size: 18px; color: var(--muted); line-height: 1.6; margin-top: 16px; }
+
+  .post-body { max-width: 720px; margin: 0 auto; padding: 40px 48px 80px; }
+  .post-body p { font-size: 17px; color: var(--ink); line-height: 1.8; margin-bottom: 24px; }
+  .post-body p em { font-style: italic; }
+  .post-body code { font-family: 'JetBrains Mono', monospace; font-size: 14px; background: var(--bg2); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+
+  .post-code-block { background: var(--ink); border-radius: 10px; padding: 24px 28px; margin: 28px 0; overflow-x: auto; }
+  .post-code-block pre { font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.8; color: #D4C8E0; margin: 0; white-space: pre-wrap; }
+  .post-code-block .hl-key { color: var(--teal); }
+  .post-code-block .hl-str { color: var(--yellow); }
+  .post-code-block .hl-comment { color: #5A4A63; }
+
+  .post-body h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; color: var(--ink); margin: 48px 0 20px; font-family: 'Bitter', serif; }
+  .post-body h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--ink); margin: 36px 0 16px; font-family: 'Bitter', serif; }
+
+  .prompt-block { background: #FAF9F5; border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 8px; padding: 20px 24px; margin: 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; color: var(--ink); }
+
+  .section-divider { width: 48px; height: 3px; background: var(--teal); border-radius: 2px; margin: 56px 0; opacity: 0.4; }
+
+  footer { padding: 24px 56px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  footer span { color: var(--muted); font-size: 13px; }
+  .ftags { display: flex; gap: 8px; }
+  .ftag { font-size: 11px; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); padding: 3px 10px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; } .nav-links { display: none; }
+    .post-header { padding: 64px 24px 0; }
+    .post-header h1 { font-size: 28px; }
+    .post-body { padding: 32px 24px 64px; }
+    footer { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="flagsmith-mcp-full.html" style="text-decoration:none"><div class="logo-text">Flag<span>smith</span></div></a>
+  <div class="nav-links">
+    <a href="flagsmith-mcp-full.html">Product</a><a href="#">Solutions</a><a href="#">Pricing</a><a href="#">Docs</a><a href="blog.html" class="active">Blog</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="btn-outline">Sign In</a>
+    <a href="#" class="btn-purple">Start Free</a>
+  </div>
+</nav>
+
+<div class="post-header">
+  <a href="blog.html" class="back-link">← Back to Blog</a>
+  <div class="post-meta">
+    <span class="post-tag">Workflow</span>
+    <span class="post-date">July 12, 2026</span>
+  </div>
+  <h1>7 Release Tasks I Handed to Cursor Instead of Doing Myself</h1>
+  <p class="post-subtitle">I wanted to see how much of my release workflow an AI agent could handle autonomously. Here's what happened.</p>
+</div>
+
+<div class="post-body">
+
+  <h2>The Experiment</h2>
+
+  <p>Writing code is only a small part of shipping software. The real work starts once the code exists — deciding who sees it, when, at what percentage, and how to pull it back if something breaks. That part has always stayed human.</p>
+
+  <p>I wanted to test how far that line had actually moved with Cursor.</p>
+
+  <h2>Before You Start</h2>
+
+  <p>You'll need two things: a Flagsmith account and the MCP server connected to your AI agent or coding tool.</p>
+
+  <p>If you're already using Flagsmith, grab your API key from Organisation Settings. Then connect it to Cursor with one command:</p>
+
+  <p>Add the server to <code>~/.cursor/mcp.json</code> (global) or <code>.cursor/mcp.json</code> (per project):</p>
+
+  <div class="post-code-block">
+<pre>{
+    <span class="hl-str">"mcpServers"</span>: {
+        <span class="hl-str">"flagsmith"</span>: {
+            <span class="hl-str">"url"</span>: <span class="hl-str">"https://mcp.flagsmith.com"</span>,
+            <span class="hl-str">"headers"</span>: { <span class="hl-str">"Authorization"</span>: <span class="hl-str">"Token &lt;your-flagsmith-api-key&gt;"</span> }
+        }
+    }
+}</pre>
+  </div>
+
+  <p>Restart your agent, run <code>/mcp</code> to confirm the connection, and you're ready. The rest of this article assumes you're set up.</p>
+
+  <p>For one feature — a new checkout experience — I decided not to touch the Flagsmith dashboard at all. The goal is to go through a release cycle using Cursor with the same environments and release strategy my team already follows. Just a different interface.</p>
+
+  <p>Here's what happened across seven tasks.</p>
+
+  <div class="section-divider"></div>
+
+  <h3>1. Create the Release</h3>
+
+  <p>Every feature starts with a release plan.</p>
+
+  <p>Instead of opening Flagsmith and manually creating a feature flag, I described what I wanted. Cursor translated intent into release infrastructure — flag created, environments confirmed, feature ID returned.</p>
+
+  <div class="prompt-block">Create a feature flag called checkout_v2 for the new checkout experience. Return the feature ID and tell me which environments it exists in.</div>
+
+  <p>What surprised me: I didn't have to think about the UI at all. The mental overhead of navigating to the right screen, filling in the right fields — completely disappeared.</p>
+
+  <h3>2. Ship to the Right People</h3>
+
+  <p>Shipping isn't binary.</p>
+
+  <p>One of the biggest advantages of feature flags is controlling who sees a feature before the rest of the world does. Internal users first. Then a small percentage. Then everyone.</p>
+
+  <p>Instead of configuring targeting rules manually, I described the intent.</p>
+
+  <div class="prompt-block">Enable checkout_v2 only for internal users. If an internal_users segment doesn't exist, create one first.</div>
+
+  <p>Cursor created the segment, applied the targeting rule, and confirmed the flag state. One prompt. No dashboard.</p>
+
+  <h3>3. Turn It Into an Experiment</h3>
+
+  <p>Once a feature is behind a flag, you have a natural opportunity to compare experiences rather than make permanent decisions.</p>
+
+  <p>Most teams skip this step because setting up an experiment manually adds friction. So they ship, guess, and move on.</p>
+
+  <p>I asked Cursor to set one up instead.</p>
+
+  <div class="prompt-block">Create an experiment comparing checkout_v1 and checkout_v2. Use checkout_completed as the primary success metric.</div>
+
+  <p>The experiment was configured in the same session, without breaking the flow of building the feature. That matters more than it sounds: the reason teams skip experimentation is usually friction, not intent.</p>
+
+  <h3>4. Understand What's Live</h3>
+
+  <p>One of the most common release questions isn't about changing something.</p>
+
+  <p>It's about understanding what's already running.</p>
+
+  <p>Engineers spend more time than they should clicking through environments trying to answer basic questions: what's enabled, who can see it, what changed and when. That work is invisible, low-value, and genuinely annoying.</p>
+
+  <div class="prompt-block">Show me everything that's currently enabled in production for checkout_v2. Summarise the release state in plain English.</div>
+
+  <p>Cursor returned a plain English summary of the current flag state across environments. This was the most useful task of the seven. Not the flashiest — but the one I'd use every single day.</p>
+
+  <h3>5. Change Production Safely</h3>
+
+  <p>Production changes shouldn't happen blindly.</p>
+
+  <p>Engineering teams have approval workflows for a reason. The value of feature flags isn't just that you can change things — it's that you can change things deliberately, with visibility into what's about to happen before it does.</p>
+
+  <p>Rather than asking Cursor to immediately publish changes, I asked it to prepare them first.</p>
+
+  <div class="prompt-block">Prepare checkout_v2 for production. Show me every proposed change before publishing anything.</div>
+
+  <p>Cursor returned a change summary and waited. That one behaviour — prepare, explain, pause — is the difference between an AI agent that helps you move fast and one that gives you a heart attack on a Friday afternoon.</p>
+
+  <h3>6. Roll Out Gradually</h3>
+
+  <p>Controlled rollouts are one of the most important risk-reduction tools in software delivery. They're also one of the most skipped, because configuring them manually adds steps to an already long process.</p>
+
+  <div class="prompt-block">Roll out checkout_v2 to 10% of users in production. Confirm the rollout percentage and flag state after.</div>
+
+  <p>Done in the same session. Same conversation. No context switch.</p>
+
+  <p>The 10% rollout that used to take three minutes of dashboard navigation happened in one sentence. That's not a small thing when you're in the middle of a deployment and your attention is already split.</p>
+
+  <h3>7. Roll It Back</h3>
+
+  <p>Every release strategy should assume something will eventually go wrong.</p>
+
+  <p>The final test wasn't deploying. It was recovering. Could Cursor reverse the rollout just as naturally as it initiated it?</p>
+
+  <div class="prompt-block">Disable checkout_v2 in production. Explain exactly what changed after the rollback.</div>
+
+  <p>It could. Flag disabled, change confirmed, state summarised. The rollback that matters most — the one you do at 11pm when something is broken and you're already stressed — took one prompt.</p>
+
+  <div class="section-divider"></div>
+
+  <h2>What I Learned</h2>
+
+  <p>The biggest shift wasn't speed, though everything was faster. It was that I never had to leave the session.</p>
+
+  <p>Every release task I described above used to require a context switch — open a browser, navigate to the right screen, configure the right fields, copy something back into the terminal. Individually, each switch takes thirty seconds. Collectively, across a full release cycle, they add up to something that quietly fragments your attention and slows you down.</p>
+
+  <h2>Flagsmith MCP</h2>
+
+  <p>With the Flagsmith MCP server connected to Cursor, the entire release workflow happened inside the same conversation where I was writing code. The tool didn't change. The guardrails didn't change. My release strategy didn't change. The interface did.</p>
+
+  <p>That's the actual value. Not that AI can manage feature flags — it's that AI can now participate in software delivery inside the same context where it's already building the software.</p>
+
+  <p>Writing code is quickly becoming the easy part. The next generation of developer tools won't just help AI write software. They'll help AI release it safely, inside the guardrails every engineering team already relies on.</p>
+
+  <p>That line is moving faster than most people realise.</p>
+
+</div>
+
+<footer>
+  <span>&copy; 2026 Flagsmith &middot; Bullet Train Ltd.</span>
+  <div class="ftags">
+    <span class="ftag">open-source</span>
+    <span class="ftag">self-hosted</span>
+    <span class="ftag">bootstrapped</span>
+  </div>
+</footer>
+
+</body>
+</html>
