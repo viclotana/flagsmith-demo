@@ -107,14 +107,6 @@
 
   <p>That boundary no longer exists. With Flagsmith's MCP server, agents can create feature flags, target user segments, configure percentage rollouts, and publish versioned changes. All from inside the same conversation where the code was written. The senior engineer's instincts become tools the agent can call.</p>
 
-  <h2>What a Senior Engineer Does Differently</h2>
-
-  <p>The difference between a senior and a junior at release time is not skill. It is risk awareness. A junior ships to everyone because they haven't been burned yet. A senior ships to 5% of internals because they have.</p>
-
-  <p>That risk awareness shows up as a series of habits: always gate new features behind a flag. Always test in a non-production environment first. Always target a small audience before widening. Always have a rollback plan that takes seconds, not minutes. Always version your changes so you can audit what happened later.</p>
-
-  <p>Each of those habits maps directly to a Flagsmith operation. And each of those operations is now available to any MCP-compatible agent as a tool it can call through natural language.</p>
-
   <h2>Before You Start</h2>
 
   <p>This article uses Flagsmith and its MCP server. If you don't have an account yet, the free tier covers everything shown here. If you're already set up, skip to the next section.</p>
@@ -136,24 +128,24 @@
 }</pre>
   </div>
 
-  <p>After that, your agent has access to every release operation you would normally perform in the Flagsmith dashboard. It can list projects, query environments, create flags, update feature states, configure rollout percentages, and publish versioned changes. Every operation is auditable and reversible.</p>
+  <p>After that, your agent can do everything you'd normally do in the Flagsmith dashboard.</p>
 
   <div class="post-code-block">
-<pre><span class="hl-comment">// prompt</span>
-<span class="hl-str">Show me all feature flags in my project and which
-environments they are enabled in.</span></pre>
+<pre><span class="hl-comment">// try this now</span>
+
+<span class="hl-str">List my projects and environments. Tell me what's
+set up.</span></pre>
   </div>
 
   <h2>Never Ship Without a Way Back</h2>
 
   <p>A senior engineer never makes a production change they can't undo in seconds. Flagsmith enforces this with a versioning model. When you change a flag's state in an environment, you are not mutating the live state directly. You create a new version, modify the feature state within that version, and then explicitly publish it.</p>
 
-  <p>This means the agent cannot accidentally make a change that takes effect without a publish step. If the agent is interrupted or makes an error, the unpublished version has no effect on live traffic. And if a published change causes problems, you roll back to the previous version instantly.</p>
-
   <p>The workflow is always: prepare, review, ship. The same pattern a senior engineer follows instinctively.</p>
 
   <div class="post-code-block">
 <pre><span class="hl-comment">// prompt</span>
+
 <span class="hl-str">Enable checkout_v2 in staging. Show me the proposed
 change before publishing it.</span></pre>
   </div>
@@ -164,10 +156,11 @@ change before publishing it.</span></pre>
 
   <p>Flagsmith treats environments as completely independent. Each has its own API key, its own feature state history, and its own version timeline. A flag can be enabled in Development for testing while remaining disabled in Production. When an agent enables a flag, it does so within a specific environment. There is no risk of a Development toggle accidentally affecting Production.</p>
 
-  <p>This also means you can give agents different levels of trust per environment. Let them toggle freely in Development. Require approval workflows in Production. The boundaries are enforced at the API level, not by convention.</p>
+  <p>This also means you can give agents different levels of trust per environment. Let them toggle freely in Development. Require approval workflows in Production.</p>
 
   <div class="post-code-block">
 <pre><span class="hl-comment">// prompt</span>
+
 <span class="hl-str">Enable checkout_v2 in development but keep it disabled
 in production.</span></pre>
   </div>
@@ -178,10 +171,9 @@ in production.</span></pre>
 
   <p>Flagsmith segments define audiences based on identity traits. An agent can create a segment, define its rules, and attach a flag override to it. The segment creation, rule definition, and flag assignment all happen in a single interaction.</p>
 
-  <p>This is the kind of operation that takes five minutes of clicking through a dashboard. In conversation, it takes one sentence.</p>
-
   <div class="post-code-block">
 <pre><span class="hl-comment">// prompt</span>
+
 <span class="hl-str">Enable checkout_v2 only for users in the internal_users
 segment. If that segment does not exist yet, create it
 using the trait is_internal = true.</span></pre>
@@ -197,6 +189,7 @@ using the trait is_internal = true.</span></pre>
 
   <div class="post-code-block">
 <pre><span class="hl-comment">// prompt</span>
+
 <span class="hl-str">Roll out checkout_v2 to 10% of production users.
 Confirm the percentage and current flag state after.</span></pre>
   </div>
@@ -210,8 +203,6 @@ Confirm the percentage and current flag state after.</span></pre>
   <p>This is the kill switch every senior engineer keeps in their back pocket. Now your agent has one too.</p>
 
   <div class="section-divider"></div>
-
-  <p>A senior engineer's value at release time is not technical skill. It is pattern recognition built over years of production scars. They know what can go wrong because they have seen it go wrong.</p>
 
   <p>Your AI agent does not need ten years of incidents to ship safely. It just needs the right tools and the right rules. Feature flags encode those rules. Flagsmith MCP exposes them as tools. And the agent already knows how to use tools.</p>
 
