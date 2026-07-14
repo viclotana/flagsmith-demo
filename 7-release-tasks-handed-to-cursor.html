@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>7 Release Tasks I Handed to Cursor Instead of Doing Myself — Flagsmith Blog</title>
+<title>7 Release Tasks I Handed to Cursor Instead of Doing Myself - Flagsmith Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,700&family=Open+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -107,7 +107,7 @@
 
   <h2>The Experiment</h2>
 
-  <p>Writing code is only a small part of shipping software. The real work starts once the code exists — deciding who sees it, when, at what percentage, and how to pull it back if something breaks. That part has always stayed human.</p>
+  <p>Writing code is only a small part of shipping software. The real work starts once the code exists. Deciding who sees it, when, at what percentage, and how to pull it back if something breaks. That part has always stayed human.</p>
 
   <p>I wanted to test how far that line had actually moved with Cursor.</p>
 
@@ -132,7 +132,7 @@
 
   <p>Restart your agent, run <code>/mcp</code> to confirm the connection, and you're ready. The rest of this article assumes you're set up.</p>
 
-  <p>For one feature — a new checkout experience — I decided not to touch the Flagsmith dashboard at all. The goal is to go through a release cycle using Cursor with the same environments and release strategy my team already follows. Just a different interface.</p>
+  <p>For one feature, a new checkout experience, I decided not to touch the Flagsmith dashboard at all. The goal is to go through a release cycle using Cursor with the same environments and release strategy my team already follows. Just a different interface.</p>
 
   <p>Here's what happened across seven tasks.</p>
 
@@ -142,11 +142,11 @@
 
   <p>Every feature starts with a release plan.</p>
 
-  <p>Instead of opening Flagsmith and manually creating a feature flag, I described what I wanted. Cursor translated intent into release infrastructure — flag created, environments confirmed, feature ID returned.</p>
+  <p>Instead of opening Flagsmith and manually creating a feature flag, I described what I wanted. Cursor translated intent into release infrastructure. Flag created, environments confirmed, feature ID returned.</p>
 
   <div class="prompt-block">Create a feature flag called checkout_v2 for the new checkout experience. Return the feature ID and tell me which environments it exists in.</div>
 
-  <p>What surprised me: I didn't have to think about the UI at all. The mental overhead of navigating to the right screen, filling in the right fields — completely disappeared.</p>
+  <p>What surprised me: I didn't have to think about the UI at all. The mental overhead of navigating to the right screen, filling in the right fields. Completely disappeared.</p>
 
   <h3>2. Ship to the Right People</h3>
 
@@ -182,19 +182,19 @@
 
   <div class="prompt-block">Show me everything that's currently enabled in production for checkout_v2. Summarise the release state in plain English.</div>
 
-  <p>Cursor returned a plain English summary of the current flag state across environments. This was the most useful task of the seven. Not the flashiest — but the one I'd use every single day.</p>
+  <p>Cursor returned a plain English summary of the current flag state across environments. This was the most useful task of the seven. Not the flashiest, but the one I'd use every single day.</p>
 
   <h3>5. Change Production Safely</h3>
 
   <p>Production changes shouldn't happen blindly.</p>
 
-  <p>Engineering teams have approval workflows for a reason. The value of feature flags isn't just that you can change things — it's that you can change things deliberately, with visibility into what's about to happen before it does.</p>
+  <p>Engineering teams have approval workflows for a reason. The value of feature flags isn't just that you can change things. It's that you can change things deliberately, with visibility into what's about to happen before it does.</p>
 
   <p>Rather than asking Cursor to immediately publish changes, I asked it to prepare them first.</p>
 
   <div class="prompt-block">Prepare checkout_v2 for production. Show me every proposed change before publishing anything.</div>
 
-  <p>Cursor returned a change summary and waited. That one behaviour — prepare, explain, pause — is the difference between an AI agent that helps you move fast and one that gives you a heart attack on a Friday afternoon.</p>
+  <p>Cursor returned a change summary and waited. That one behaviour (prepare, explain, pause) is the difference between an AI agent that helps you move fast and one that gives you a heart attack on a Friday afternoon.</p>
 
   <h3>6. Roll Out Gradually</h3>
 
@@ -214,7 +214,7 @@
 
   <div class="prompt-block">Disable checkout_v2 in production. Explain exactly what changed after the rollback.</div>
 
-  <p>It could. Flag disabled, change confirmed, state summarised. The rollback that matters most — the one you do at 11pm when something is broken and you're already stressed — took one prompt.</p>
+  <p>It could. Flag disabled, change confirmed, state summarised. The rollback that matters most, the one you do at 11pm when something is broken and you're already stressed, took one prompt.</p>
 
   <div class="section-divider"></div>
 
@@ -222,13 +222,13 @@
 
   <p>The biggest shift wasn't speed, though everything was faster. It was that I never had to leave the session.</p>
 
-  <p>Every release task I described above used to require a context switch — open a browser, navigate to the right screen, configure the right fields, copy something back into the terminal. Individually, each switch takes thirty seconds. Collectively, across a full release cycle, they add up to something that quietly fragments your attention and slows you down.</p>
+  <p>Every release task I described above used to require a context switch. Open a browser, navigate to the right screen, configure the right fields, copy something back into the terminal. Individually, each switch takes thirty seconds. Collectively, across a full release cycle, they add up to something that quietly fragments your attention and slows you down.</p>
 
   <h2>Flagsmith MCP</h2>
 
   <p>With the Flagsmith MCP server connected to Cursor, the entire release workflow happened inside the same conversation where I was writing code. The tool didn't change. The guardrails didn't change. My release strategy didn't change. The interface did.</p>
 
-  <p>That's the actual value. Not that AI can manage feature flags — it's that AI can now participate in software delivery inside the same context where it's already building the software.</p>
+  <p>That's the actual value. Not that AI can manage feature flags. It's that AI can now participate in software delivery inside the same context where it's already building the software.</p>
 
   <p>Writing code is quickly becoming the easy part. The next generation of developer tools won't just help AI write software. They'll help AI release it safely, inside the guardrails every engineering team already relies on.</p>
 
