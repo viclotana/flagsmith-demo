@@ -80,14 +80,55 @@
   .logo-row { display: flex; justify-content: center; align-items: center; gap: 52px; flex-wrap: wrap; }
   .logo-name { font-size: 16px; font-weight: 700; color: #C8C0D4; letter-spacing: -0.3px; }
 
-  /* SECTION — RELEASE RULES */
-  .s-rules { padding: 96px 56px; background: var(--bg2); border-bottom: 1px solid var(--border); }
-  .s-rules-inner { max-width: 960px; margin: 0 auto; }
-  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .rule { background: #FAF9F5; border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; display: flex; align-items: flex-start; gap: 14px; }
-  .rule-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(10,194,163,0.1); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
-  .rule-text { font-size: 15px; color: var(--ink); font-weight: 500; line-height: 1.4; }
-  .rule-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  /* SECTION — BLAST RADIUS */
+  .s-blast { padding: 96px 56px; background: var(--bg2); border-bottom: 1px solid var(--border); }
+  .s-blast-inner { max-width: 760px; margin: 0 auto; }
+  .s-blast h2 em { color: var(--muted); }
+  .blast-panel { background: #FAF9F5; border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .blast-readout { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .blast-pct { font-size: 38px; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; min-width: 92px; color: var(--ink); font-family: 'Bitter', serif; }
+  .blast-sub { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .blast-grid { display: grid; grid-template-columns: repeat(40, 1fr); gap: 3px; margin-bottom: 22px; }
+  .blast-dot { aspect-ratio: 1; border-radius: 50%; background: var(--bg2); transition: background 0.18s ease, transform 0.18s ease; }
+  .blast-dot.on { background: var(--teal); }
+  .blast-dot.logo { box-shadow: inset 0 0 0 1.5px #B8B0C4; }
+  .blast-dot.logo.on { box-shadow: inset 0 0 0 1.5px var(--teal); transform: scale(1.3); }
+  .blast-track { position: relative; padding-bottom: 30px; }
+  .blast-track input[type=range] {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
+    background: var(--bg2); border-radius: 2px; outline: none; margin: 0;
+    display: block; position: relative; z-index: 2;
+  }
+  .blast-track input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ink); cursor: grab; border: 3px solid #FAF9F5;
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+  .blast-track input[type=range]::-moz-range-thumb {
+    width: 22px; height: 22px; border-radius: 50%; background: var(--ink);
+    cursor: grab; border: 3px solid #FAF9F5; box-shadow: 0 0 0 1px var(--ink);
+  }
+  .blast-tick { position: absolute; top: 2px; pointer-events: none; }
+  .blast-tick i {
+    position: absolute; left: 0; top: 12px; width: 1px; height: 6px;
+    background: var(--border); transform: translateX(-0.5px);
+  }
+  .blast-tick b {
+    position: absolute; left: 0; top: 20px; transform: translateX(-50%);
+    font-size: 11px; font-weight: 500; color: var(--muted);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .blast-status {
+    margin-top: 8px; padding: 13px 15px; border-radius: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.55;
+    border: 1px solid var(--border); background: var(--bg); min-height: 62px; color: var(--ink);
+  }
+  .blast-status .lbl { color: var(--muted); }
+  .blast-status .meta { display: block; margin-top: 6px; font-size: 10px; color: #B8B0C4; letter-spacing: 0.02em; }
+  .blast-status.blocked { border-color: #D94A3D; background: #FEF6F5; }
+  .blast-status.blocked .hdr { color: #D94A3D; font-weight: 600; }
+  .blast-foot { margin-top: 20px; font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .blast-foot strong { color: var(--ink); font-weight: 600; }
 
   /* SECTION — CONVERSATION */
   .s-convo { padding: 56px 56px; }
@@ -134,7 +175,7 @@
     h1 { font-size: 38px; } h2 { font-size: 30px; }
     .hero { padding: 64px 24px 0; }
     .rules-grid, .cap-grid, .s-convo-inner { grid-template-columns: 1fr; }
-    .s-rules, .s-convo, .s-cap { padding: 72px 24px; }
+    .s-blast, .s-convo, .s-cap { padding: 72px 24px; }
     .logo-row { gap: 24px; }
     .cta-row { flex-direction: column; align-items: center; }
     footer { flex-direction: column; gap: 16px; }
@@ -230,17 +271,31 @@
   </div>
 </section>
 
-<!-- RELEASE RULES -->
-<section class="s-rules">
-  <div class="s-rules-inner">
-    <div class="rules-grid">
-      <div class="rule"><div class="rule-icon">👥</div><div><div class="rule-text">Release to internal users first</div><div class="rule-sub">Segment-based targeting your team already defined</div></div></div>
-      <div class="rule"><div class="rule-icon">📊</div><div><div class="rule-text">Roll out to 5% before everyone</div><div class="rule-sub">Percentage rollouts with automatic monitoring</div></div></div>
-      <div class="rule"><div class="rule-icon">🏢</div><div><div class="rule-text">Keep enterprise on the old version</div><div class="rule-sub">Multivariate flags per customer segment</div></div></div>
-      <div class="rule"><div class="rule-icon">📅</div><div><div class="rule-text">Pause releases on Fridays</div><div class="rule-sub">Scheduled flag management baked into workflow</div></div></div>
-      <div class="rule"><div class="rule-icon">⚡</div><div><div class="rule-text">Roll back instantly if errors spike</div><div class="rule-sub">Kill switches operable from any MCP client</div></div></div>
-      <div class="rule"><div class="rule-icon">✅</div><div><div class="rule-text">Nothing ships without approval</div><div class="rule-sub">Change request workflows agents respect automatically</div></div></div>
+<!-- BLAST RADIUS -->
+<section class="s-blast">
+  <div class="s-blast-inner">
+    <div class="section-label">Full adherence to guardrails</div>
+    <h2>Your agent can move this slider.<br><em>It can't skip steps.</em></h2>
+
+    <div class="blast-panel">
+      <div class="blast-readout">
+        <div class="blast-pct" id="blast-pct">5%</div>
+        <div class="blast-sub" id="blast-users">50,000 of 1,000,000 users exposed</div>
+      </div>
+
+      <div class="blast-grid" id="blast-grid"></div>
+
+      <div class="blast-track">
+        <input type="range" min="0" max="100" value="5" step="1" id="blast-slider" aria-label="Rollout percentage">
+        <div id="blast-ticks"></div>
+      </div>
+
+      <div class="blast-status" id="blast-status"></div>
     </div>
+
+    <p class="blast-foot">
+      Your AI agents will only work within your set guardrails.
+    </p>
   </div>
 </section>
 
@@ -261,6 +316,86 @@
     <span class="ftag">bootstrapped</span>
   </div>
 </footer>
+<script>
+(function () {
+  var TOTAL = 1000000, DOTS = 400, GATES = [5, 25, 50, 100], LOGOS = [42, 118, 205, 271, 338];
+  var THUMB = 22, HALF = THUMB / 2;
+
+  var grid = document.getElementById('blast-grid'),
+      pctEl = document.getElementById('blast-pct'),
+      usersEl = document.getElementById('blast-users'),
+      statusEl = document.getElementById('blast-status'),
+      slider = document.getElementById('blast-slider'),
+      ticksEl = document.getElementById('blast-ticks'),
+      dots = [];
+
+  function posFor(v) {
+    return 'calc(' + v + '% + ' + (HALF - v * (HALF / 50)).toFixed(3) + 'px)';
+  }
+
+  [0].concat(GATES).forEach(function (v) {
+    var t = document.createElement('div');
+    t.className = 'blast-tick';
+    t.style.left = posFor(v);
+    t.innerHTML = '<i></i><b>' + v + (v === 100 ? '%' : '') + '</b>';
+    ticksEl.appendChild(t);
+  });
+
+  for (var i = 0; i < DOTS; i++) {
+    var d = document.createElement('div');
+    d.className = 'blast-dot' + (LOGOS.indexOf(i) > -1 ? ' logo' : '');
+    grid.appendChild(d);
+    dots.push(d);
+  }
+
+  var order = dots.map(function (_, i) { return i; });
+  for (var j = order.length - 1; j > 0; j--) {
+    var k = Math.floor(Math.random() * (j + 1));
+    var t = order[j]; order[j] = order[k]; order[k] = t;
+  }
+
+  function gateFor(v) {
+    for (var g = 0; g < GATES.length; g++) { if (v <= GATES[g]) return GATES[g]; }
+    return 100;
+  }
+
+  function render(v) {
+    var lit = Math.round(DOTS * v / 100);
+    for (var i = 0; i < order.length; i++) {
+      dots[order[i]].classList.toggle('on', i < lit);
+    }
+
+    pctEl.textContent = v + '%';
+    usersEl.textContent = Math.round(TOTAL * v / 100).toLocaleString()
+      + ' of ' + TOTAL.toLocaleString() + ' users exposed';
+
+    var allowed = (GATES.indexOf(v) > -1) || v === 0;
+
+    if (allowed) {
+      statusEl.className = 'blast-status';
+      if (v === 0) {
+        statusEl.innerHTML = '<span class="lbl">flagsmith mcp →</span> checkout_v2 is dark. Nobody sees it.';
+      } else {
+        var nx = GATES[GATES.indexOf(v) + 1];
+        statusEl.innerHTML =
+          '<span class="lbl">flagsmith mcp →</span> ✓ checkout_v2 at ' + v + '%. Approved step.'
+          + '<br><span class="lbl">next allowed step →</span> ' + (nx ? nx + '%' : 'at ceiling')
+          + '<span class="meta">ACME Inc · 5-25-50-100 release strategy</span>';
+      }
+    } else {
+      var g = gateFor(v);
+      statusEl.className = 'blast-status blocked';
+      statusEl.innerHTML =
+        '<span class="lbl">you →</span> "Roll checkout_v2 to ' + v + '%."'
+        + '<br><span class="hdr">flagsmith mcp → Blocked.</span> '
+        + v + '% skips the gate at ' + g + '%.';
+    }
+  }
+
+  slider.addEventListener('input', function () { render(parseInt(slider.value, 10)); });
+  render(5);
+})();
+</script>
 <script>
   flagsmith.init({
     environmentID: '4vQCGuBp6dVXaenrd4MXzn',
